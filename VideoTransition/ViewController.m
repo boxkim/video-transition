@@ -40,12 +40,11 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (UIButton *)zoomInBtn
-{
+- (UIButton *)zoomInBtn {
     if (!_zoomInBtn) {
         _zoomInBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, 50, 100, 40)];
         _zoomInBtn.hidden = YES;
-        [_zoomInBtn setTitle:@"Zoom In" forState:UIControlStateNormal];
+        [_zoomInBtn setTitle:@"镜头拉近" forState:UIControlStateNormal];
         [_zoomInBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
         [_zoomInBtn addTarget:self action:@selector(zoomIn:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_zoomInBtn];
@@ -53,17 +52,15 @@
     return _zoomInBtn;
 }
 
-- (void)zoomIn:(id)sender
-{
+- (void)zoomIn:(id)sender {
     [self playVideoWithName:@"video1.mp4" withIndex:1];
 }
 
-- (UIButton *)zoomOutBtn
-{
+- (UIButton *)zoomOutBtn {
     if (!_zoomOutBtn) {
         _zoomOutBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, 50, 100, 40)];
         _zoomOutBtn.hidden = YES;
-        [_zoomOutBtn setTitle:@"Zoom Out" forState:UIControlStateNormal];
+        [_zoomOutBtn setTitle:@"返回" forState:UIControlStateNormal];
         [_zoomOutBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
         [_zoomOutBtn addTarget:self action:@selector(zoomOut:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_zoomOutBtn];
@@ -71,16 +68,14 @@
     return _zoomOutBtn;
 }
 
-- (void)zoomOut:(id)sender
-{
+- (void)zoomOut:(id)sender {
     [self playVideoWithName:@"video2.mp4" withIndex:2];
 }
 
 
 #pragma mark - IMVideoTransitionDelegate
 
-- (void)videoTransitionView:(IMVideoTransitionView *)transitionView playerDidFinishAtIndex:(NSInteger)index
-{
+- (void)videoTransitionView:(IMVideoTransitionView *)transitionView playerDidFinishAtIndex:(NSInteger)index {
     if (index == 1) {
         [self loadMaskImageWithName:@"scene2.jpg"];
         [self.zoomOutBtn setHidden:NO];
@@ -98,8 +93,7 @@
 // 遮罩层有两个作用
 // 1、掩盖视频加载时候的黑屏现象
 // 2、视频播放完成之后的场景显示
-- (void)loadMaskImageWithName:(NSString *)imageName
-{
+- (void)loadMaskImageWithName:(NSString *)imageName {
     if (!_maskImageView) {
         self.maskImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
         [self.maskImageView setUserInteractionEnabled:YES];
@@ -113,8 +107,7 @@
 
 // 这里为了方便，每次播放视频都重新初始化一个播放器
 // index 参数只是一个标识符，可以用任何便于识别的数据类型
-- (void)playVideoWithName:(NSString *)videoFile withIndex:(NSInteger)index
-{
+- (void)playVideoWithName:(NSString *)videoFile withIndex:(NSInteger)index {
     if (_videoTransitionView) {
         _videoTransitionView.delegate = nil;
         [_videoTransitionView.moviePlayer stop];
