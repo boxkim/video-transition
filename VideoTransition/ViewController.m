@@ -16,8 +16,9 @@
 // 遮罩层
 @property (nonatomic, strong) UIImageView *maskImageView;
 
+// 两个控制按钮，项目里在视频播放结束之后可以用动画来显示炫酷的场景
+// demo 仅供学习，就懒得写了，大家自由发挥吧
 @property (nonatomic, strong) UIButton *zoomInBtn;
-
 @property (nonatomic, strong) UIButton *zoomOutBtn;
 
 @end
@@ -80,18 +81,20 @@
         [self loadMaskImageWithName:@"scene2.jpg"];
         [self.zoomOutBtn setHidden:NO];
         [self.zoomInBtn setHidden:YES];
+        [self.view bringSubviewToFront:self.zoomOutBtn];
     }
     else if (index == 2) {
         [self loadMaskImageWithName:@"scene1.jpg"];
         [self.zoomInBtn setHidden:NO];
         [self.zoomOutBtn setHidden:YES];
+        [self.view bringSubviewToFront:self.zoomInBtn];
     }
 }
 
 #pragma mark - mask image view
 
 // 遮罩层有两个作用
-// 1、掩盖视频加载时候的黑屏现象
+// 1、掩盖视频加载时候的黑屏现象（视频播放器加载视频时的过度）
 // 2、视频播放完成之后的场景显示
 - (void)loadMaskImageWithName:(NSString *)imageName {
     if (!_maskImageView) {
