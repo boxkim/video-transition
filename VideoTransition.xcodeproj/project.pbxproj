@@ -552,6 +552,7 @@
 				3FD91C4F1DFAA05E0074BC33 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3FD91C501DFAA05E0074BC33 /* Build configuration list for PBXNativeTarget "VideoTransitionTests" */ = {
 			isa = XCConfigurationList;
@@ -560,6 +561,7 @@
 				3FD91C521DFAA05E0074BC33 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3FD91C531DFAA05E0074BC33 /* Build configuration list for PBXNativeTarget "VideoTransitionUITests" */ = {
 			isa = XCConfigurationList;
@@ -568,6 +570,7 @@
 				3FD91C551DFAA05E0074BC33 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
