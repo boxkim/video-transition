@@ -7,12 +7,12 @@
 //
 
 #import "ViewController.h"
-#import "IMVideoTransitionView.h"
+#import "IMVideoView.h"
 
-@interface ViewController () <IMVideoTransitionDelegate>
+@interface ViewController () <IMVideoViewDelegate>
 
 // 视频转场视图
-@property (nonatomic, strong) IMVideoTransitionView *videoTransitionView;
+@property (nonatomic, strong) IMVideoView *videoView;
 // 遮罩层
 @property (nonatomic, strong) UIImageView *maskImageView;
 
@@ -50,6 +50,7 @@
         [_zoomInBtn addTarget:self action:@selector(zoomIn:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_zoomInBtn];
     }
+    [self.view bringSubviewToFront:_zoomInBtn];
     return _zoomInBtn;
 }
 
@@ -68,6 +69,7 @@
         [_zoomOutBtn addTarget:self action:@selector(zoomOut:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_zoomOutBtn];
     }
+    [self.view bringSubviewToFront:_zoomOutBtn];
     return _zoomOutBtn;
 }
 
@@ -79,7 +81,7 @@
 
 #pragma mark - IMVideoTransitionDelegate
 
-- (void)videoTransitionView:(IMVideoTransitionView *)transitionView playerDidFinishAtIndex:(NSInteger)index
+- (void)videoView:(IMVideoView *)videoView playDidFinishAtIndex:(NSInteger)index
 {
     if (index == 1) {
         [self loadMaskImageWithName:@"scene2.jpg"];
@@ -91,6 +93,10 @@
         [self.zoomInBtn setHidden:NO];
         [self.zoomOutBtn setHidden:YES];
     }
+}
+
+- (void)videoView:(IMVideoView *)videoView playDidStartAtIndex:(NSInteger)index {
+    [self.view bringSubviewToFront:self.videoView];
 }
 
 #pragma mark - mask image view
@@ -115,28 +121,19 @@
 // index 参数只是一个标识符，可以用任何便于识别的数据类型
 - (void)playVideoWithName:(NSString *)videoFile withIndex:(NSInteger)index
 {
-    if (_videoTransitionView) {
-        _videoTransitionView.delegate = nil;
-        [_videoTransitionView.moviePlayer stop];
-        [_videoTransitionView removeFromSuperview];
-        _videoTransitionView = nil;
+    if (!_videoView) {
+        self.videoView = [[IMVideoView alloc] initWithFrame:self.view.bounds];
+        self.videoView.delegate = self;
+        [self.view addSubview:self.videoView];
     }
     
-    NSString *path = [[NSBundle mainBundle] pathForResource:videoFile ofType:nil];
-    self.videoTransitionView = [[IMVideoTransitionView alloc] initWithFrame:self.view.bounds
-                                                                    withUrl:[NSURL fileURLWithPath:path]];
-    self.videoTransitionView.index = index;
-    self.videoTransitionView.delegate = self;
-    [self.view addSubview:self.videoTransitionView];
+    self.videoView.index = index;
     
-    // 这里因为视频加载是需要时间的，加载过程中播放器呈黑色，如果不加遮罩会出现闪屏现象
-    // 0.2 秒是个预估值，正规点是需要监听视频加载完成消息的，如果有闪屏现象可以适当的加长这个时间，但是不宜太长。
     // 在视频开始加载的时候先将遮罩层放在视频上面，等视频加载完成开始播放的时候将视频放到上面
-    typeof(self) weakSelf = self;
     [self.view bringSubviewToFront:self.maskImageView];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [weakSelf.view bringSubviewToFront:weakSelf.videoTransitionView];
-    });
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:videoFile ofType:nil];
+    [self.videoView updatePlayerWithURL:[NSURL fileURLWithPath:path]];
 }
 
 

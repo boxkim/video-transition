@@ -15,7 +15,7 @@
 		3FD91C331DFAA05E0074BC33 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD91C311DFAA05E0074BC33 /* LaunchScreen.storyboard */; };
 		3FD91C3E1DFAA05E0074BC33 /* VideoTransitionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD91C3D1DFAA05E0074BC33 /* VideoTransitionTests.m */; };
 		3FD91C491DFAA05E0074BC33 /* VideoTransitionUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD91C481DFAA05E0074BC33 /* VideoTransitionUITests.m */; };
-		3FD91C641DFAA63B0074BC33 /* IMVideoTransitionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD91C5E1DFAA63B0074BC33 /* IMVideoTransitionView.m */; };
+		3FD91C641DFAA63B0074BC33 /* IMVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD91C5E1DFAA63B0074BC33 /* IMVideoView.m */; };
 		3FD91C651DFAA63B0074BC33 /* scene1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3FD91C601DFAA63B0074BC33 /* scene1.jpg */; };
 		3FD91C661DFAA63B0074BC33 /* scene2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3FD91C611DFAA63B0074BC33 /* scene2.jpg */; };
 		3FD91C671DFAA63B0074BC33 /* video1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3FD91C621DFAA63B0074BC33 /* video1.mp4 */; };
@@ -56,8 +56,8 @@
 		3FD91C441DFAA05E0074BC33 /* VideoTransitionUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VideoTransitionUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FD91C481DFAA05E0074BC33 /* VideoTransitionUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoTransitionUITests.m; sourceTree = "<group>"; };
 		3FD91C4A1DFAA05E0074BC33 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3FD91C5D1DFAA63B0074BC33 /* IMVideoTransitionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMVideoTransitionView.h; sourceTree = "<group>"; };
-		3FD91C5E1DFAA63B0074BC33 /* IMVideoTransitionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMVideoTransitionView.m; sourceTree = "<group>"; };
+		3FD91C5D1DFAA63B0074BC33 /* IMVideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMVideoView.h; sourceTree = "<group>"; };
+		3FD91C5E1DFAA63B0074BC33 /* IMVideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMVideoView.m; sourceTree = "<group>"; };
 		3FD91C601DFAA63B0074BC33 /* scene1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = scene1.jpg; sourceTree = "<group>"; };
 		3FD91C611DFAA63B0074BC33 /* scene2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = scene2.jpg; sourceTree = "<group>"; };
 		3FD91C621DFAA63B0074BC33 /* video1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video1.mp4; sourceTree = "<group>"; };
@@ -156,8 +156,8 @@
 		3FD91C5C1DFAA63B0074BC33 /* IMVideoTransitionView */ = {
 			isa = PBXGroup;
 			children = (
-				3FD91C5D1DFAA63B0074BC33 /* IMVideoTransitionView.h */,
-				3FD91C5E1DFAA63B0074BC33 /* IMVideoTransitionView.m */,
+				3FD91C5D1DFAA63B0074BC33 /* IMVideoView.h */,
+				3FD91C5E1DFAA63B0074BC33 /* IMVideoView.m */,
 			);
 			path = IMVideoTransitionView;
 			sourceTree = "<group>";
@@ -312,7 +312,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3FD91C2B1DFAA05E0074BC33 /* ViewController.m in Sources */,
-				3FD91C641DFAA63B0074BC33 /* IMVideoTransitionView.m in Sources */,
+				3FD91C641DFAA63B0074BC33 /* IMVideoView.m in Sources */,
 				3FD91C281DFAA05E0074BC33 /* AppDelegate.m in Sources */,
 				3FD91C251DFAA05E0074BC33 /* main.m in Sources */,
 			);
@@ -552,6 +552,7 @@
 				3FD91C4F1DFAA05E0074BC33 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3FD91C501DFAA05E0074BC33 /* Build configuration list for PBXNativeTarget "VideoTransitionTests" */ = {
 			isa = XCConfigurationList;
@@ -560,6 +561,7 @@
 				3FD91C521DFAA05E0074BC33 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3FD91C531DFAA05E0074BC33 /* Build configuration list for PBXNativeTarget "VideoTransitionUITests" */ = {
 			isa = XCConfigurationList;
@@ -568,6 +570,7 @@
 				3FD91C551DFAA05E0074BC33 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
