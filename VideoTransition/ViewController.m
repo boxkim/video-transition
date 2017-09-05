@@ -16,8 +16,9 @@
 // 遮罩层
 @property (nonatomic, strong) UIImageView *maskImageView;
 
+// 两个控制按钮，项目里在视频播放结束之后可以用动画来显示炫酷的场景
+// demo 仅供学习，就懒得写了，大家自由发挥吧
 @property (nonatomic, strong) UIButton *zoomInBtn;
-
 @property (nonatomic, strong) UIButton *zoomOutBtn;
 
 @end
@@ -40,12 +41,11 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (UIButton *)zoomInBtn
-{
+- (UIButton *)zoomInBtn {
     if (!_zoomInBtn) {
         _zoomInBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, 50, 100, 40)];
         _zoomInBtn.hidden = YES;
-        [_zoomInBtn setTitle:@"Zoom In" forState:UIControlStateNormal];
+        [_zoomInBtn setTitle:@"镜头拉近" forState:UIControlStateNormal];
         [_zoomInBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
         [_zoomInBtn addTarget:self action:@selector(zoomIn:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_zoomInBtn];
@@ -54,17 +54,15 @@
     return _zoomInBtn;
 }
 
-- (void)zoomIn:(id)sender
-{
+- (void)zoomIn:(id)sender {
     [self playVideoWithName:@"video1.mp4" withIndex:1];
 }
 
-- (UIButton *)zoomOutBtn
-{
+- (UIButton *)zoomOutBtn {
     if (!_zoomOutBtn) {
         _zoomOutBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, 50, 100, 40)];
         _zoomOutBtn.hidden = YES;
-        [_zoomOutBtn setTitle:@"Zoom Out" forState:UIControlStateNormal];
+        [_zoomOutBtn setTitle:@"返回" forState:UIControlStateNormal];
         [_zoomOutBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
         [_zoomOutBtn addTarget:self action:@selector(zoomOut:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_zoomOutBtn];
@@ -73,8 +71,7 @@
     return _zoomOutBtn;
 }
 
-- (void)zoomOut:(id)sender
-{
+- (void)zoomOut:(id)sender {
     [self playVideoWithName:@"video2.mp4" withIndex:2];
 }
 
@@ -87,11 +84,13 @@
         [self loadMaskImageWithName:@"scene2.jpg"];
         [self.zoomOutBtn setHidden:NO];
         [self.zoomInBtn setHidden:YES];
+        [self.view bringSubviewToFront:self.zoomOutBtn];
     }
     else if (index == 2) {
         [self loadMaskImageWithName:@"scene1.jpg"];
         [self.zoomInBtn setHidden:NO];
         [self.zoomOutBtn setHidden:YES];
+        [self.view bringSubviewToFront:self.zoomInBtn];
     }
 }
 
@@ -102,10 +101,9 @@
 #pragma mark - mask image view
 
 // 遮罩层有两个作用
-// 1、掩盖视频加载时候的黑屏现象
+// 1、掩盖视频加载时候的黑屏现象（视频播放器加载视频时的过度）
 // 2、视频播放完成之后的场景显示
-- (void)loadMaskImageWithName:(NSString *)imageName
-{
+- (void)loadMaskImageWithName:(NSString *)imageName {
     if (!_maskImageView) {
         self.maskImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
         [self.maskImageView setUserInteractionEnabled:YES];
