@@ -50,7 +50,6 @@
         [_zoomInBtn addTarget:self action:@selector(zoomIn:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_zoomInBtn];
     }
-    [self.view bringSubviewToFront:_zoomInBtn];
     return _zoomInBtn;
 }
 
@@ -67,7 +66,6 @@
         [_zoomOutBtn addTarget:self action:@selector(zoomOut:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_zoomOutBtn];
     }
-    [self.view bringSubviewToFront:_zoomOutBtn];
     return _zoomOutBtn;
 }
 
@@ -95,18 +93,16 @@
 }
 
 - (void)videoView:(IMVideoView *)videoView playDidStartAtIndex:(NSInteger)index {
+    // 视频加载完成开始播放的时候放到最上层
     [self.view bringSubviewToFront:self.videoView];
 }
 
 #pragma mark - mask image view
 
-// 遮罩层有两个作用
-// 1、掩盖视频加载时候的黑屏现象（视频播放器加载视频时的过度）
-// 2、视频播放完成之后的场景显示
+// 视频播放完成之后的场景显示
 - (void)loadMaskImageWithName:(NSString *)imageName {
     if (!_maskImageView) {
         self.maskImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
-        [self.maskImageView setUserInteractionEnabled:YES];
         [self.view addSubview:self.maskImageView];
     }
     [self.maskImageView setImage:[UIImage imageNamed:imageName]];
@@ -115,7 +111,6 @@
 
 #pragma mark - play video
 
-// 这里为了方便，每次播放视频都重新初始化一个播放器
 // index 参数只是一个标识符，可以用任何便于识别的数据类型
 - (void)playVideoWithName:(NSString *)videoFile withIndex:(NSInteger)index
 {
